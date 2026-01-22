@@ -1,62 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>VerityChain WalletConnect</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>VerityChain Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-  <h2>VerityChain WalletConnect (Polygon)</h2>
-  <button id="connectBtn">Connect Wallet</button>
-  <p id="status">Not connected</p>
+  <h2>JS Binding Test</h2>
+  <button id="connectBtn">TEST BUTTON</button>
+  <p id="status">Idle</p>
 
-  <script type="module">
-    console.log("MODULE START");
+  <script>
+    console.log("SCRIPT LOADED");
 
-    import { createWeb3Modal, defaultConfig }
-      from "https://unpkg.com/@web3modal/ethers@3/dist/index.js";
-    import { ethers }
-      from "https://cdn.jsdelivr.net/npm/ethers@6.10.0/dist/ethers.esm.min.js";
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("DOM READY");
 
-    console.log("IMPORTS OK");
+      const btn = document.getElementById("connectBtn");
+      const status = document.getElementById("status");
 
-    const projectId = "1077108356b8ade896b19b035eeaa78a";
-
-    const polygon = {
-      chainId: 137,
-      name: "Polygon",
-      currency: "MATIC",
-      explorerUrl: "https://polygonscan.com",
-      rpcUrl: "https://polygon-rpc.com"
-    };
-
-    const modal = createWeb3Modal({
-      projectId,
-      chains: [polygon],
-      ethersConfig: defaultConfig({
-        metadata: {
-          name: "VerityChain",
-          description: "VerityChain DApp",
-          url: "https://khayronalaya.github.io/veritychain-dapp/",
-          icons: []
-        }
-      })
-    });
-
-    const btn = document.getElementById("connectBtn");
-    const status = document.getElementById("status");
-
-    btn.onclick = () => {
-      console.log("OPEN MODAL");
-      modal.open();
-    };
-
-    modal.subscribeProvider(async provider => {
-      if (!provider) return;
-      const ethersProvider = new ethers.BrowserProvider(provider);
-      const signer = await ethersProvider.getSigner();
-      status.innerText = "Connected: " + await signer.getAddress();
+      btn.onclick = function () {
+        console.log("BUTTON CLICKED");
+        status.innerText = "Button works ✅";
+        alert("Button clicked");
+      };
     });
   </script>
 
